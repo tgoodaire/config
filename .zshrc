@@ -1,8 +1,6 @@
 autoload -U compinit
 compinit
 
-bindkey -v
-
 autoload -U colors
 colors
 
@@ -40,12 +38,14 @@ export RBENV_ROOT=/usr/local/var/rbenv
 eval "$(rbenv init -)"
 
 export DYN_CHEF_PROD='tgoodaire'
+export DYN_CHEF_USER='tgoodaire'
 export DYN_CHEF_DATA="${HOME}/work/cookbooks/dyn_chef_data"
 export SSL_CERT_FILE="${DYN_CHEF_DATA}/config/cacert.pem"
 export CHEF_CB_DIR="${HOME}/work/cookbooks/"
 export DRIVER_PLUGIN="vagrant"
-export PROVISIONER="chef_solo"
+export PROVISIONER="chef_zero"
 export VAGRANT_DEFAULT_PROVIDER="virtualbox"
+export PLATFORMS="ubuntu"
 
 PATH=/usr/local/var/rbenv/shims:/opt/local/bin:/sbin:/usr/sbin:/usr/local/mysql-5.6.10-osx10.7-x86_64/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin:~/android/adt-bundle-mac-x86_64-20130219/sdk/platform-tools:~/bin:${DYN_CHEF_DATA}:$PATH
 export PATH
@@ -54,3 +54,7 @@ export PATH
 alias config="git --work-tree=$HOME --git-dir=$HOME/.config.git"
 # Find dotfiles in git directory
 setopt dotglob
+EDITOR=vim
+alias reberks="knife cookbook bulk delete '.*';cd ~/work/cookbooks/dyn_core; berks upload; cd ~/work/cookbooks/_base; berks upload; cd ~/work/cookbooks/dyn_qlp; berks upload; cd ~/work/cookbooks/dyn_dse; berks upload"
+
+alias ush="sudo /usr/local/etc/rc.d/ushare restart"
